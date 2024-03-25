@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ping-exporter
+  name: ping-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: ping-exporter
+  replicas: 1
+  strategy:
+    type: Recreate
+
+  template:
+    metadata:
+      labels:
+        app: ping-exporter
+    spec:
+      containers:
+        - name: ping-exporter
+          image: czerwonk/ping_exporter:latest
+          env:
+            - name: CONFIG_FILE
+              value: /config/config.yml 
+          volumeMounts:
+            - mountPath: /config/config.yml
+              name: exporter-config
+              subPath: config.yml
+          ports:
+            - containerPort: 9427
+      volumes:
+        - name: exporter-config
+          configMap:
+            name: ping-exporter-config
+---
+apiVersion: v1
+kind: Service
+metadata:  
+  name: ping-exporter
+  namespace: monitoring
+  labels:
+    app: ping-exporter
+spec:
+  selector:    
+    app: ping-exporter
+  ports:  
+  - name: http
+    port: 9427
+    targetPort: 9427
+    protocol: TCP

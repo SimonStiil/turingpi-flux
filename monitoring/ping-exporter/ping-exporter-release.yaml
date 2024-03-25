@@ -1,0 +1,59 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: ping-exporter
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: ping-exporter
+      version: 1.0.0
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: ping-exporter
+  install:
+    createNamespace: true
+  upgrade:
+    crds: CreateReplace
+  interval: 1m0s
+  targetNamespace: monitoring
+  values:
+    image:
+      tag: "v1.1.0"
+    securityContext:
+      capabilities:
+        add:
+          - NET_RAW
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+    service:
+      type: ClusterIP
+      port: 9427
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9427"
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 32Mi
+    config:
+      targets:
+      - 192.168.1.1
+      - 192.168.100.1
+      - 10.116.1.1
+      dns:
+        refresh: 2m15s
+        nameserver: 192.168.1.5
+      ping:
+        interval: 5s
+        timeout: 5s
+        history-size: 50
+        payload-size: 42

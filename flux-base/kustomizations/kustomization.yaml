@@ -10,4 +10,4 @@ resources:
 - flux-webhook.yaml
 - longhorn.yaml
 - elastic-system.yaml
-#- monitoring.yaml
+- monitoring.yaml

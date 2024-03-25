@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  config.yml: |-
+    targets:
+    - 192.168.1.1
+    - 192.168.100.1
+    - 10.116.1.1
+    dns:
+      refresh: 2m15s
+      nameserver: 192.168.1.5
+    ping:
+      interval: 5s
+      timeout: 5s
+      history-size: 50
+      payload-size: 42
+kind: ConfigMap
+metadata:
+  name: ping-exporter-config
+  namespace: monitoring

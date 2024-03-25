@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  namespace: monitoring
+  labels:
+    app: prometheus-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-server
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+#      initContainers:
+#      - name: chmod-prometheus-vol
+#        image: alpine:3.19.1
+#        # This is where the magic hapens, find files with old UID (1004) and chown with new UID (1005) and GID (2005)
+#        command: ["chmod", "777", "/mnt"]
+#        securityContext:
+#          readOnlyRootFilesystem: true
+#          capabilities:
+#            drop: ["all"]
+#            add: ["CHMOD"]
+#          runAsUser: 0
+#          runAsNonRoot: false
+#        volumeMounts:
+#        - name: prometheus-storage-volume
+#          mountPath: /mnt
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+            - "--storage.tsdb.retention.size=20GB"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 2000Mi
+            requests:
+              cpu: 200m
+              memory: 500Mi
+      securityContext:
+        fsGroup: 65534
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: prometheus-server-conf
+  
+        - name: prometheus-storage-volume
+          persistentVolumeClaim:
+            claimName: prometheus-data
