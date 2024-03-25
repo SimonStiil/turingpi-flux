@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: traefik
+      reconcileStrategy: ChartVersion
+      version: 26.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+  install:
+    crds: Create
+    createNamespace: true
+  interval: 6m0s
+  targetNamespace: traefik
+  upgrade:
+    crds: CreateReplace
+  values:
+    logs:
+      general: 
+        level: INFO
+    additionalArguments:
+    - --entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
+    - --entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
+    experimental:
+      kubernetesGateway:
+        certificate:
+          group: ""
+          kind: Secret
+          name: traefik-default-certificate
+        enabled: true
+    ports:
+      web:
+        redirectTo: 
+          port: websecure
+    service:
+      spec:
+        externalTrafficPolicy: Local
+      loadBalancerIP: "192.168.1.30"
+    providers:
+      kubernetesCRD:
+        allowExternalNameServices: true
+        allowEmptyServices: true
+        ingressClass: "traefik"
+      kubernetesIngress:
+        publishedService:
+          enabled: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+        ingressClass: "traefik"
+    ingressClass:
+      name: traefik
+    ingressRoute:
+      dashboard:
+        annotations:
+          kubernetes.io/ingress.class: traefik
+      healthcheck:
+        annotations:
+          kubernetes.io/ingress.class: traefik

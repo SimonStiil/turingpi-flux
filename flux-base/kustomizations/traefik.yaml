@@ -1,0 +1,119 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-pre
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./traefik/pre
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: cert-manager-pre
+  healthChecks:
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: gatewayclasses.gateway.networking.k8s.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: gateways.gateway.networking.k8s.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: tcproutes.gateway.networking.k8s.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: tlsroutes.gateway.networking.k8s.io 
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: httproutes.gateway.networking.k8s.io
+  postBuild:
+    substitute:
+      var_substitution_enabled: "true"
+    substituteFrom:
+      - kind: Secret
+        name: clusterconfig
+        optional: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-chart
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./traefik/chart
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: traefik-pre
+  healthChecks:
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: ingressroutes.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: ingressroutetcps.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: ingressrouteudps.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: middlewares.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: middlewaretcps.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: serverstransports.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: tlsoptions.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: tlsstores.traefik.io
+  - apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    name: traefikservices.traefik.io
+  postBuild:
+    substitute:
+      var_substitution_enabled: "true"
+    substituteFrom:
+      - kind: Secret
+        name: clusterconfig
+        optional: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: traefik-post
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./traefik/post
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: traefik-chart
+  healthChecks:
+  - apiVersion: traefik.io/v1alpha1
+    kind: TLSStore
+    name: default
+    namespace: traefik
+  - apiVersion: traefik.io/v1alpha1
+    kind: IngressRoute
+    name: dashboard
+    namespace: traefik
+  postBuild:
+    substitute:
+      var_substitution_enabled: "true"
+    substituteFrom:
+      - kind: Secret
+        name: clusterconfig
+        optional: true
