@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: longhorn-release
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: longhorn
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn-repo
+      version: 1.6.0
+  install:
+    crds: Create
+    createNamespace: true
+  interval: 10m0s
+  targetNamespace: longhorn-system
+  values:
+    ingress:
+      enabled: true
+      host: longhorn.${clusterdomain:=undefined}
+      ingressClassName: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    defaultSettings:
+      defaultDataPath: "/var/lib/rancher/longhorn"
+      storageReservedPercentageForDefaultDisk: 20
+      defaultReplicaCount: 2
+    longhornUI:
+      replicas: 1
