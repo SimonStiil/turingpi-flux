@@ -13,9 +13,8 @@ spec:
         kind: HelmRepository
         name: jetstack
   install:
-    crds: Create
-    createNamespace: true
-  interval: 1m0s
+    crds: Skip
+  interval: 10m0s
   targetNamespace: cert-manager
   upgrade:
     crds: CreateReplace
@@ -23,5 +22,5 @@ spec:
     extraArgs:
     - --dns01-recursive-nameservers-only
     - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
-    installCRDs: true
+    installCRDs: false
     

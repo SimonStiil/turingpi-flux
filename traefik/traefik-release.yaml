@@ -14,12 +14,9 @@ spec:
         kind: HelmRepository
         name: traefik
   install:
-    crds: Create
-    createNamespace: true
-  interval: 6m0s
+    crds: Skip
+  interval: 10m0s
   targetNamespace: traefik
-  upgrade:
-    crds: CreateReplace
   values:
     logs:
       general: 

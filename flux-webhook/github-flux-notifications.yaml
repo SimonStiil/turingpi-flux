@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   type: github
-  address: https://github.com/SimonStiil/flux
+  address: https://github.com/SimonStiil/turingpi-flux 
   secretRef:
     name: github-flux-notifications-token
 ---

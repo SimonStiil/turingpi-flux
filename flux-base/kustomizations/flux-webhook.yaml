@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
-    - name: external-secrets-pre
+    - name: crds-external-secrets
   postBuild:
     substitute:
       var_substitution_enabled: "true"
