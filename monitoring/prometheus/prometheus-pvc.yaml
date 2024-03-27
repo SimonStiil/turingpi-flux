@@ -8,7 +8,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn-fast
+  storageClassName: nfs-fast
   resources:
     requests:
       storage: 50Gi
