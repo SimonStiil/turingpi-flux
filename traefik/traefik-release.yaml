@@ -16,11 +16,25 @@ spec:
   install:
     crds: Skip
   interval: 10m0s
+  timeout: 2m0s
   targetNamespace: traefik
   values:
     logs:
       general: 
-        level: INFO
+        level: DEBUG
+        format: json
+      access:
+        enabled: true
+        filePath: "/accesslogs/access.log"
+    entryPoints:
+      metrics:
+        address: :8082
+    metrics:
+      prometheus:
+        entryPoint: metrics
+        addEntryPointsLabels: true
+        addRoutersLabels: true
+        addServicesLabels: true
     additionalArguments:
     - --entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
     - --entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
@@ -59,3 +73,47 @@ spec:
       healthcheck:
         annotations:
           kubernetes.io/ingress.class: traefik
+    deployment:
+      initContainers:
+      - name: filebeat
+        image: docker.elastic.co/beats/filebeat:8.13.0
+        restartPolicy: Always
+        volumeMounts:
+        - name: accesslog
+          mountPath: "/accesslogs"
+        - name: filebeat-config
+          mountPath: /usr/share/filebeat/filebeat.yml
+          subPath: filebeat.yml
+        - name: elastic-ca-elasticsearch
+          mountPath: /certificates/elastic/
+        - name: filebeat-data
+          mountPath: /usr/share/filebeat/data/
+        env:
+        - name: ELASTICSEARCH_HOSTS
+          value: "https://elasticsearch-es-http.elastic-eck:9200"
+        - name: ELASTICSEARCH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: elastic-logging
+              key: username
+              optional: false
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elastic-logging
+              key: password
+              optional: false
+      additionalVolumes:
+      - name: accesslog
+        emptyDir: {}
+      - name: filebeat-data
+        emptyDir: {}
+      - name: filebeat-config
+        configMap:
+          name: filebeat-configmap
+      - name: elastic-ca-elasticsearch
+        secret:
+          secretName: elastic-ca-elasticsearch
+    additionalVolumeMounts:
+    - name: accesslog
+      mountPath: "/accesslogs"

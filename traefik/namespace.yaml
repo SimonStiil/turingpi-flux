@@ -4,3 +4,4 @@ metadata:
   name: traefik
   labels:
     elastic-eck/ca-elasticsearch: "true"
+    elastic-eck/ca-kibana: "true"
