@@ -26,6 +26,15 @@ spec:
       access:
         enabled: true
         filePath: "/accesslogs/access.log"
+        fields:
+          defaultMode: keep
+          names:
+            ClientUsername: keep
+          headers:
+            defaultMode: keep
+            names:
+              User-Agent: keep
+              Authorization: drop
     entryPoints:
       metrics:
         address: :8082
@@ -85,12 +94,16 @@ spec:
           mountPath: /usr/share/filebeat/filebeat.yml
           subPath: filebeat.yml
         - name: elastic-ca-elasticsearch
-          mountPath: /certificates/elastic/
+          mountPath: /certificates/elasticsearch/
+        - name: elastic-ca-kibana
+          mountPath: /certificates/kibana/
         - name: filebeat-data
           mountPath: /usr/share/filebeat/data/
         env:
         - name: ELASTICSEARCH_HOSTS
           value: "https://elasticsearch-es-http.elastic-eck:9200"
+        - name: KIBANA_HOST
+          value: "https://kibana-kb-http.elastic-eck:5601"
         - name: ELASTICSEARCH_USERNAME
           valueFrom:
             secretKeyRef:
@@ -114,6 +127,9 @@ spec:
       - name: elastic-ca-elasticsearch
         secret:
           secretName: elastic-ca-elasticsearch
+      - name: elastic-ca-kibana
+        secret:
+          secretName: elastic-ca-kibana
     additionalVolumeMounts:
     - name: accesslog
       mountPath: "/accesslogs"

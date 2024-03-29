@@ -8,12 +8,18 @@ data:
         enabled: true
     output.elasticsearch:
       index: tpi-logs-traefik-turingpi
-      hosts: '$${ELASTICSEARCH_HOSTS:elasticsearch-master.elastic:9200}'
+      hosts: '$${ELASTICSEARCH_HOSTS:}'
       username: '$${ELASTICSEARCH_USERNAME:}'
       password: '$${ELASTICSEARCH_PASSWORD:}'
       ssl.certificate_authorities:
-        - /certificates/elastic/ca.crt
+        - /certificates/elasticsearch/ca.crt
       allow_older_versions: true
+    setup.kibana:
+      host: "$${KIBANA_HOST:}"
+      username: '$${ELASTICSEARCH_USERNAME:}'
+      password: '$${ELASTICSEARCH_PASSWORD:}'
+      ssl.certificate_authorities:
+        - /certificates/kibana/ca.crt
     setup.template:
       name: tpi-logs-traefik
       pattern: tpi-logs-traefik-*
