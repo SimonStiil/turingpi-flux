@@ -9,6 +9,8 @@ resources:
 - csi-driver-nfs.yaml
 - traefik.yaml
 - flux-webhook.yaml
-- longhorn.yaml
 - elastic-system.yaml
 - monitoring.yaml
+
+## Removed elements:
+#- longhorn.yaml
