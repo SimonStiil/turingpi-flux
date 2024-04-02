@@ -6,3 +6,4 @@ resources:
 - gateway-api.yaml
 - metallb.yaml
 - traefik-crds.yaml
+- rook-crds.yaml

@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
+  timeout: 1m
   path: ./crds/cert-manager
   prune: false
   sourceRef:

@@ -11,6 +11,7 @@ resources:
 - flux-webhook.yaml
 - elastic-system.yaml
 - monitoring.yaml
+- rook.yaml
 
 ## Removed elements:
 #- longhorn.yaml
