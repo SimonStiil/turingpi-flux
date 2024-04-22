@@ -51,7 +51,7 @@ spec:
     additionalArguments:
     - --entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
     - --entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
-    - --log.filePath=/logs/traefik.log
+#    - --log.filePath=/logs/traefik.log
     experimental:
       kubernetesGateway:
         namespacePolicy: All
@@ -89,10 +89,53 @@ spec:
         annotations:
           kubernetes.io/ingress.class: traefik
     deployment:
+      initContainers:
+      - name: filebeat
+        image: docker.elastic.co/beats/filebeat:8.13.0
+        restartPolicy: Always
+        volumeMounts:
+        - name: accesslog
+          mountPath: "/accesslogs"
+        - name: filebeat-config
+          mountPath: /usr/share/filebeat/filebeat.yml
+          subPath: filebeat.yml
+        - name: elastic-ca-elasticsearch
+          mountPath: /certificates/elasticsearch/
+        - name: elastic-ca-kibana
+          mountPath: /certificates/kibana/
+        - name: filebeat-data
+          mountPath: /usr/share/filebeat/data/
+        env:
+        - name: ELASTICSEARCH_HOSTS
+          value: "https://elasticsearch-es-http.elastic-eck:9200"
+        - name: KIBANA_HOST
+          value: "https://kibana-kb-http.elastic-eck:5601"
+        - name: ELASTICSEARCH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: elastic-logging
+              key: username
+              optional: false
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elastic-logging
+              key: password
+              optional: false
       additionalVolumes:
-      - name: logging-data
-        persistentVolumeClaim:
-          claimName: logging-data
+      - name: accesslog
+        emptyDir: {}
+      - name: filebeat-data
+        emptyDir: {}
+      - name: filebeat-config
+        configMap:
+          name: filebeat-configmap
+      - name: elastic-ca-elasticsearch
+        secret:
+          secretName: elastic-ca-elasticsearch
+      - name: elastic-ca-kibana
+        secret:
+          secretName: elastic-ca-kibana
     additionalVolumeMounts:
-    - name: logging-data
-      mountPath: "/logs"
+    - name: accesslog
+      mountPath: "/accesslogs"

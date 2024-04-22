@@ -5,5 +5,5 @@ resources:
 - https://raw.githubusercontent.com/rook/rook/v1.13.7/deploy/examples/operator.yaml
 - cluster.yaml
 - ceph-ingress.yaml
-# replicapools.yaml
-# storageclasss.yaml
+- replicapools.yaml
+- storageclasss.yaml
