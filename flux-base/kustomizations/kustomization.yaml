@@ -12,6 +12,7 @@ resources:
 - elastic-system.yaml
 - monitoring.yaml
 - rook.yaml
+- reloader.yaml
 
 ## Removed elements:
 #- longhorn.yaml
