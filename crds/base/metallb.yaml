@@ -8,7 +8,7 @@ spec:
   timeout: 2m
   url: https://github.com/metallb/metallb.git
   ref:
-    tag: v0.14.3
+    tag: v0.14.5
   ignore: |
     # exclude all
     /*

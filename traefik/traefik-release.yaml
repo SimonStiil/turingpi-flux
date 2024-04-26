@@ -9,7 +9,7 @@ spec:
     spec:
       chart: traefik
       reconcileStrategy: ChartVersion
-      version: 26.1.0
+      version: 27.0.2
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -91,7 +91,7 @@ spec:
     deployment:
       initContainers:
       - name: filebeat
-        image: docker.elastic.co/beats/filebeat:8.13.0
+        image: docker.elastic.co/beats/filebeat:8.13.2
         restartPolicy: Always
         volumeMounts:
         - name: accesslog
