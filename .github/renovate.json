@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "kubernetes": {
+    "fileMatch": ["\\.yaml$"],
+    "ignorePaths": ["crds/base/gateway-api.yaml"]
+  },
+  "flux": {
+    "fileMatch": ["\\.yaml$"],
+    "ignorePaths": ["crds/base/gateway-api.yaml"]
+  },
+  "groupName": "all dependencies",
+  "groupSlug": "all",
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "groupName": "all dependencies",
+      "groupSlug": "all",
+      "matchPackagePatterns": [
+        "*"
+      ]
+    }
+  ],
+  "separateMajorMinor": false
+  
+}
