@@ -13,6 +13,9 @@ resources:
 - monitoring.yaml
 - rook.yaml
 - reloader.yaml
+- uptime-kuma.yaml
+- dashboard.yaml
+- jenkins.yaml
 
 ## Removed elements:
 #- longhorn.yaml
