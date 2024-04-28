@@ -7,7 +7,6 @@ data:
         var.paths: ["/accesslogs/access.log*"]
         enabled: true
     output.elasticsearch:
-      index: tpi-logs-traefik-turingpi
       hosts: '$${ELASTICSEARCH_HOSTS:}'
       username: '$${ELASTICSEARCH_USERNAME:}'
       password: '$${ELASTICSEARCH_PASSWORD:}'
@@ -20,9 +19,6 @@ data:
       password: '$${ELASTICSEARCH_PASSWORD:}'
       ssl.certificate_authorities:
         - /certificates/kibana/ca.crt
-    setup.template:
-      name: tpi-logs-traefik
-      pattern: tpi-logs-traefik-*
 ## Load dashboards with:
 # filebeat setup --dashboards -E setup.kibana.host=$KIBANAHOST:443 -E setup.kibana.username=$ELASTICSEARCH_USERNAME -E setup.kibana.password=$ELASTICSEARCH_PASSWORD
 kind: ConfigMap
