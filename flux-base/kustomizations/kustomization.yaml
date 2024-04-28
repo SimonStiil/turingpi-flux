@@ -16,6 +16,7 @@ resources:
 - uptime-kuma.yaml
 - dashboard.yaml
 - jenkins.yaml
+- webtop.yaml
 
 ## Removed elements:
 #- longhorn.yaml

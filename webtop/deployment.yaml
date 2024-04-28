@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webtop-simon
+  namespace: webtop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webtop-simon
+  template:
+    metadata:
+      labels:
+        app: webtop-simon
+    spec:
+      containers:
+      - name: webtop-simon
+        image: simonstiil/webtop-debian-xfce:main-arm64@sha256:6dfef9794c8abfb7504f694d7d02e72ad0f19f9c48fcef80139352d3415b1d58
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        - containerPort: 3001
+        volumeMounts:
+        - name: simon-home
+          mountPath: /config
+        - name: simon-data
+          mountPath: /data
+        - name: cache-volume
+          mountPath: /dev/shm
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: Europe/Copenhagen
+        - name: TITLE
+          value: Webtop-Simon
+        - name: START_DOCKER
+          value: "false"
+        - name: CUSTOM_USER
+          valueFrom:
+            secretKeyRef:
+              name: webtop-simon
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: webtop-simon
+              key: password
+      serviceAccountName: webtop-admin
+      volumes:
+        - name: simon-home
+          persistentVolumeClaim:
+            claimName: simon-home
+        - name: simon-data
+          persistentVolumeClaim:
+            claimName: simon-data
+        - name: cache-volume
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi
