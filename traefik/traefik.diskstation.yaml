@@ -1,0 +1,80 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: diskstation-traefik-tls
+  namespace: traefik
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: HostSNI(`traefik.diskstation.${topleveldomain:=undefined}`)
+    services:
+    - name: diskstation-traefik-tls
+      port: 443
+  tls:
+    passthrough: true 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: diskstation-traefik-tls
+  namespace: traefik
+spec:
+  ports:
+  - protocol: TCP
+    port: 443
+    targetPort: 8443
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: diskstation-traefik-tls
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.1.5
+    ports:
+      - port: 8443
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: diskstation-traefik
+  namespace: traefik
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`traefik.diskstation.${topleveldomain:=undefined}`)
+    kind: Rule
+    services:
+    - kind: Service
+      name: diskstation-traefik
+      scheme: http
+      port: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: diskstation-traefik
+  namespace: traefik
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: diskstation-traefik
+  namespace: traefik
+subsets:
+  - addresses:
+      - ip: 192.168.1.5
+    ports:
+      - port: 8080

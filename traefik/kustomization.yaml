@@ -10,3 +10,4 @@ resources:
 - default-cert-store.yaml
 - ingress.yaml
 - kubernetes-api-route.yaml
+- traefik.diskstation.yaml
