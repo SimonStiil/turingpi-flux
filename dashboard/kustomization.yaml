@@ -7,3 +7,4 @@ resources:
 - ingress.yaml
 - service-account.yaml
 - homepage-secret-external.yaml
+- kubernetes-dashboard-release.yaml
