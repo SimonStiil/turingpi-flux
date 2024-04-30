@@ -13,7 +13,7 @@ spec:
     name: flux-system
   dependsOn:
     - name: crds-traefik
-#    - name: crds-gateway-api
+    - name: crds-gateway-api
   healthChecks:
   - apiVersion: traefik.io/v1alpha1
     kind: TLSStore
