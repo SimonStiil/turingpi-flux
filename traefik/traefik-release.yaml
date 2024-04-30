@@ -52,14 +52,14 @@ spec:
     - --entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
     - --entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.42.0.1,192.168.1.5
 #    - --log.filePath=/logs/traefik.log
-    experimental:
-      kubernetesGateway:
-        namespacePolicy: All
-        certificate:
-          group: ""
-          kind: Secret
-          name: traefik-default-certificate
-        enabled: true
+#    experimental:
+#      kubernetesGateway:
+#        namespacePolicy: All
+#        certificate:
+#          group: ""
+#          kind: Secret
+#          name: traefik-default-certificate
+#        enabled: true
     ports:
       web:
         redirectTo: 

@@ -4,12 +4,10 @@
     "config:base"
   ],
   "kubernetes": {
-    "fileMatch": ["\\.yaml$"],
-    "ignorePaths": ["crds/base/gateway-api.yaml"]
+    "fileMatch": ["\\.yaml$"]
   },
   "flux": {
-    "fileMatch": ["\\.yaml$"],
-    "ignorePaths": ["crds/base/gateway-api.yaml"]
+    "fileMatch": ["\\.yaml$"]
   },
   "groupName": "all dependencies",
   "groupSlug": "all",
