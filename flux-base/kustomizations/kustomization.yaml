@@ -17,6 +17,7 @@ resources:
 - dashboard.yaml
 - jenkins.yaml
 - webtop.yaml
+- mongodb-operator.yaml
 
 ## Removed elements:
 #- longhorn.yaml

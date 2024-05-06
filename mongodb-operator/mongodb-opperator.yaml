@@ -2,20 +2,24 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: mongodb-operator-crds
+  name: mongodb-operator
   namespace: flux-system
 spec:
   chart:
     spec:
-      chart: community-operator-crds
+      chart: community-operator
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         name: mongodb
   install:
     createNamespace: true
-    crds: CreateReplace
+    crds: Skip
   upgrade:
-    crds: CreateReplace
+    crds: Skip
   interval: 10m0s
   targetNamespace: mongodb-operator
+  values:
+    community-operator-crds:
+      enabled: false
+  
