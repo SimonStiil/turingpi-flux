@@ -7,3 +7,4 @@ resources:
 - metallb.yaml
 - traefik-crds.yaml
 - rook-crds.yaml
+- mongodb-opperator-crds.yaml
