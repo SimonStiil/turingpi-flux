@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  timeout: 5m
   path: ./cert-manager
   prune: true
   sourceRef:
@@ -14,6 +15,34 @@ spec:
   dependsOn:
     - name: crds-cert-manager
     - name: crds-external-secrets
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: cert-manager-cert-manager
+    namespace: cert-manager
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: cert-manager-cert-manager-cainjector
+    namespace: cert-manager
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: cert-manager-cert-manager-webhook
+    namespace: cert-manager
+  - apiVersion: v1
+    kind: Service
+    name: cert-manager-cert-manager
+    namespace: cert-manager
+  - apiVersion: v1
+    kind: Service
+    name: cert-manager-cert-manager-webhook
+    namespace: cert-manager
+  - apiVersion: external-secrets.io/v1beta1
+    kind: ExternalSecret
+    name: cloudflare-api-token-secret
+    namespace: cert-manager
+  - apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    name: letsencrypt-cloudflare-issuer
   postBuild:
     substitute:
       var_substitution_enabled: "true"

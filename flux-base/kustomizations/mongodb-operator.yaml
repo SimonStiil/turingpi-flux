@@ -6,11 +6,17 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  timeout: 5m
   path: ./mongodb-operator
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: mongodb-kubernetes-operator
+    namespace: mongodb-operator
   dependsOn:
-    - name: crds-external-secrets
+    - name: crds-base
 

@@ -6,8 +6,18 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  timeout: 5m
   path: ./elastic-system
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: StatefulSet
+    name: elastic-operator
+    namespace: elastic-system
+  - apiVersion: v1
+    kind: Service
+    name: elastic-operator-webhook
+    namespace: elastic-system

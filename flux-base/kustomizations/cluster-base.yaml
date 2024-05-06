@@ -6,9 +6,14 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  timeout: 5m
   path: ./cluster-base
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
+  healthChecks:
+  - apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    name: local-storage
 ---

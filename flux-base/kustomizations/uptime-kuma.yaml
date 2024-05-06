@@ -6,11 +6,25 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  timeout: 5m
   path: ./uptime-kuma
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: deployment
+    namespace: uptime-kuma
+  - apiVersion: v1
+    kind: Service
+    name: uptime-kuma
+    namespace: uptime-kuma
+  - apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    name: uptime-kuma
+    namespace: uptime-kuma
   postBuild:
     substitute:
       var_substitution_enabled: "true"

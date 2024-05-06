@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m0s
+  timeout: 5m
   path: ./crds/base
   prune: false
   sourceRef:

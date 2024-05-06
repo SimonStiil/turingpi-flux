@@ -7,7 +7,8 @@ metadata:
 spec:
   chart:
     spec:
-      chart: reloader 
+      chart: reloader
+      version: 1.0.93
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository

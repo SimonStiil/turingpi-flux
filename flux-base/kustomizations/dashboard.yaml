@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  timeout: 5m
   path: ./dashboard
   prune: true
   sourceRef:
@@ -13,6 +14,15 @@ spec:
     name: flux-system
   dependsOn:
     - name: crds-external-secrets
+  healthChecks:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: csi-nfs-controller
+    namespace: kube-system
+  - apiVersion: apps/v1
+    kind: DaemonSet
+    name: csi-nfs-node
+    namespace: kube-system
   postBuild:
     substitute:
       var_substitution_enabled: "true"
