@@ -27,7 +27,7 @@ data:
           description: Renovate dashboard
       - Homepage:
         - icon: dashboard-icons.png
-          href: icons
+          href: https://github.com/walkxcode/dashboard-icons
           description: getHomepage Icons
       - Jira:
         - icon: jira.png
@@ -63,28 +63,19 @@ data:
             type: uptimekuma
             url: https://uptime.${clusterdomain:=undefined}
             slug: devops
-    - Traefik:
-      - Diskstation:
-          icon: traefik.png
-          href: https://traefik.diskstation.${topleveldomain:=undefined}
-          server: diskstation
-          widget:
-            type: traefik
-            url: https://traefik.diskstation.${topleveldomain:=undefined}
-      - Home:
-          icon: traefik.png
-          href: https://traefik.k3s.${topleveldomain:=undefined}
-          server: home
-          widget:
-            type: traefik
-            url: https://traefik.k3s.${topleveldomain:=undefined}
-      - Turing:
+      - Traefik:
           icon: traefik.png
           href: https://traefik.tpi.${topleveldomain:=undefined}
           server: turing
           widget:
             type: traefik
             url: https://traefik.tpi.${topleveldomain:=undefined}
+    - External:
+      - My IP:
+          icon: traefik.png
+          href: https://traefik.tpi.${topleveldomain:=undefined}
+          server: turing
+
     - Diskstation:
       - Diskstation:
           icon: synology-dsm.png
@@ -103,6 +94,13 @@ data:
               url: https://downloadstation.${topleveldomain:=undefined}
               username: {{HOMEPAGE_VAR_DISKSTATION_USERNAME}}
               password: {{HOMEPAGE_VAR_DISKSTATION_PASSWORD}}
+      - Traefik:
+          icon: traefik.png
+          href: https://traefik.diskstation.${topleveldomain:=undefined}
+          server: diskstation
+          widget:
+            type: traefik
+            url: https://traefik.diskstation.${topleveldomain:=undefined}
   widgets.yaml: |
     - kubernetes:
         cluster:
