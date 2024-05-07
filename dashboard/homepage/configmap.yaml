@@ -29,6 +29,12 @@ data:
         - icon: dashboard-icons.png
           href: https://github.com/walkxcode/dashboard-icons
           description: getHomepage Icons
+        - icon: dashboard-icons.png
+          href: https://simpleicons.org/
+          description: Simple Icons
+        - icon: dashboard-icons.png
+          href: https://pictogrammers.com/library/mdi/
+          description: Materal Design Icons
       - Jira:
         - icon: jira.png
           href: https://stiil.atlassian.net/jira/software/projects/LAB/boards/1
@@ -54,10 +60,14 @@ data:
           icon: jenkins.png
           description: Jenkins Build serever
           href: https://jenkins.${clusterdomain:=undefined}
+          namespace: jenkins
+          app: jenkins
           server: turing
       - UptimeKuma:
           icon: uptime-kuma.svg
           href: https://uptime.${clusterdomain:=undefined}
+          namespace: uptime-kuma
+          app: uptime-kuma
           server: turing
           widget:
             type: uptimekuma
@@ -67,6 +77,8 @@ data:
           icon: traefik.png
           href: https://traefik.tpi.${topleveldomain:=undefined}
           server: turing
+          namespace: traefik
+          app: traefik
           widget:
             type: traefik
             url: https://traefik.tpi.${topleveldomain:=undefined}
@@ -89,6 +101,7 @@ data:
       - Diskstation:
           icon: synology-dsm.png
           href: https://diskstation.${topleveldomain:=undefined}
+          siteMonitor: https://diskstation.${topleveldomain:=undefined}
           widget:
             type: diskstation
             url: https://diskstation.${topleveldomain:=undefined}
@@ -96,16 +109,18 @@ data:
             password: {{HOMEPAGE_VAR_DISKSTATION_PASSWORD}}
             volume: volume_2
       - Downloadstation:
-            icon: synology-download-station.png
-            href: https://downloadstation.${topleveldomain:=undefined}
-            widget:
-              type: downloadstation
-              url: https://downloadstation.${topleveldomain:=undefined}
-              username: {{HOMEPAGE_VAR_DISKSTATION_USERNAME}}
-              password: {{HOMEPAGE_VAR_DISKSTATION_PASSWORD}}
+          icon: synology-download-station.png
+          href: https://downloadstation.${topleveldomain:=undefined}
+          siteMonitor: https://downloadstation.${topleveldomain:=undefined}
+          widget:
+            type: downloadstation
+            url: https://downloadstation.${topleveldomain:=undefined}
+            username: {{HOMEPAGE_VAR_DISKSTATION_USERNAME}}
+            password: {{HOMEPAGE_VAR_DISKSTATION_PASSWORD}}
       - Traefik:
           icon: traefik.png
           href: https://traefik.diskstation.${topleveldomain:=undefined}
+          siteMonitor: https://traefik.diskstation.${topleveldomain:=undefined}
           server: diskstation
           widget:
             type: traefik

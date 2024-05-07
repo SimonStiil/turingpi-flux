@@ -2,13 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: uptime-kuma
+    app.kubernetes.io/name: uptime-kuma
+    kustomize.toolkit.fluxcd.io/force: enabled
   name: deployment
   namespace: uptime-kuma
 spec:
   selector:
     matchLabels:
-      app: uptime-kuma
+      app.kubernetes.io/name: uptime-kuma
   replicas: 1
   strategy:
     type: Recreate
@@ -16,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: uptime-kuma
+        app.kubernetes.io/name: uptime-kuma
     spec:
       containers:
         - name: uptime-kuma
@@ -53,7 +54,7 @@ metadata:
   name: uptime-kuma
   namespace: uptime-kuma
   labels:
-    app: uptime-kuma
+    app.kubernetes.io/name: uptime-kuma
 spec:
   ingressClassName: traefik
   rules:
@@ -74,10 +75,10 @@ metadata:
   name: uptime-kuma
   namespace: uptime-kuma
   labels:
-    app: uptime-kuma
+    app.kubernetes.io/name: uptime-kuma
 spec:
   selector:    
-    app: uptime-kuma
+    app.kubernetes.io/name: uptime-kuma
   ports:  
   - name: http
     port: 3001
