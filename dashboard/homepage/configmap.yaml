@@ -54,11 +54,11 @@ data:
           icon: jenkins.png
           description: Jenkins Build serever
           href: https://jenkins.${clusterdomain:=undefined}
-          server: home
+          server: turing
       - UptimeKuma:
           icon: uptime-kuma.svg
           href: https://uptime.${clusterdomain:=undefined}
-          server: home
+          server: turing
           widget:
             type: uptimekuma
             url: https://uptime.${clusterdomain:=undefined}
@@ -72,10 +72,19 @@ data:
             url: https://traefik.tpi.${topleveldomain:=undefined}
     - External:
       - My IP:
-          icon: traefik.png
-          href: https://traefik.tpi.${topleveldomain:=undefined}
+          icon: https://www.myip.com/img/myip.png
+          href: https://www.myip.com/
           server: turing
-
+          widget:
+            type: customapi
+            url: https://api.myip.com
+            refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
+            method: GET # optional, e.g. POST
+            mappings:
+            - field: ip # needs to be YAML string or object
+              label: IP
+            - field: country # needs to be YAML string or object
+              label: Country
     - Diskstation:
       - Diskstation:
           icon: synology-dsm.png

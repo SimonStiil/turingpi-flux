@@ -76,7 +76,7 @@ spec:
                   name: homepage-secret
                   key: portainer-token
             - name: LOG_LEVEL
-              value: "info"
+              value: "debug"
       volumes:
         - name: homepage-config
           configMap:
