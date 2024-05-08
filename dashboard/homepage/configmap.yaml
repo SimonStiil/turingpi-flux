@@ -82,6 +82,31 @@ data:
           widget:
             type: traefik
             url: https://traefik.tpi.${topleveldomain:=undefined}
+      - Elastic Cluster Health:
+          icon: elastic.svg
+          href: https://kibana.tpi.${topleveldomain:=undefined}
+          server: turing
+          widget:
+            type: customapi
+            url: https://elastic.tpi.${topleveldomain:=undefined}/_cluster/health
+            username: {{HOMEPAGE_VAR_ELASTIC_USERNAME}}
+            password: {{HOMEPAGE_VAR_ELASTIC_PASSWORD}}
+            refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
+            method: GET
+            headers:
+              kbn-xsrf: reporting
+            mappings:
+            - field: status
+              label: Status
+            - field: number_of_nodes
+              label: Node Count
+              format: number
+            - field: active_shards
+              label: Active Shards
+              format: number
+            - field: active_shards_percent_as_number
+              label: Percent Active Shards
+              format: percent
     - External:
       - My IP:
           icon: https://www.myip.com/img/myip.png
