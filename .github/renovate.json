@@ -9,15 +9,19 @@
   "flux": {
     "fileMatch": ["\\.yaml$"]
   },
-  "groupName": "all dependencies",
-  "groupSlug": "all",
   "lockFileMaintenance": {
     "enabled": false
   },
   "packageRules": [
     {
+      "groupName": "Fluxcd",
+      "groupSlug": "flux-cd",
+      "matchPackagePrefixes": ["ghcr.io/fluxcd"]
+    },
+    {
       "groupName": "all dependencies",
       "groupSlug": "all",
+      "excludePackagePrefixes": ["ghcr.io/fluxcd"],
       "matchPackagePatterns": [
         "*"
       ]
