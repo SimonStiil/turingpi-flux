@@ -91,7 +91,7 @@ spec:
     deployment:
       initContainers:
       - name: filebeat
-        image: docker.elastic.co/beats/filebeat:8.13.2
+        image: docker.elastic.co/beats/filebeat:8.13.4
         restartPolicy: Always
         volumeMounts:
         - name: accesslog
