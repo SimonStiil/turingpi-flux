@@ -226,6 +226,29 @@ data:
               label: IP
             - field: country # needs to be YAML string or object
               label: Country
+      - Pullrequests:
+          icon: github.png
+          href: https://github.com/SimonStiil
+          server: turing
+          siteMonitor: https://github-es-hook.${clusterdomain:=undefined}
+          widget:
+            type: customapi
+            url: https://github-es-hook.${clusterdomain:=undefined}/results
+            refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
+            method: GET # optional, e.g. POST
+            mappings:
+            - field: 
+                user: open
+              label: User Open
+            - field: 
+                user: closed
+              label: User Closed
+            - field: 
+                bot: open
+              label: Bot Open
+            - field: 
+                bot: closed
+              label: Bot Closed
 
   widgets.yaml: |
     - kubernetes:
