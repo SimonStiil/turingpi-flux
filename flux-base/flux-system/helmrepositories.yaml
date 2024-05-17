@@ -1,5 +1,5 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: traefik
@@ -8,7 +8,7 @@ spec:
   interval: 1h
   url: https://traefik.github.io/charts
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: rancher-latest
@@ -17,7 +17,7 @@ spec:
   interval: 1h
   url: https://releases.rancher.com/server-charts/latest
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: jetstack
@@ -26,7 +26,7 @@ spec:
   interval: 1h
   url: https://charts.jetstack.io
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: csi-driver-nfs
@@ -35,7 +35,7 @@ spec:
   interval: 1h
   url: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: jenkins
@@ -44,7 +44,7 @@ spec:
   interval: 1h
   url: https://charts.jenkins.io
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: external-secrets
@@ -53,7 +53,7 @@ spec:
   interval: 1h
   url: https://charts.external-secrets.io
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: portainer
@@ -62,7 +62,7 @@ spec:
   interval: 1h
   url: https://portainer.github.io/k8s/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: metallb
@@ -71,7 +71,7 @@ spec:
   interval: 1h
   url: https://metallb.github.io/metallb
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: ping-exporter
@@ -80,7 +80,7 @@ spec:
   interval: 1h
   url: https://raw.githubusercontent.com/czerwonk/ping_exporter/main/dist/charts/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: prometheus-community
@@ -89,7 +89,7 @@ spec:
   interval: 1h
   url: https://prometheus-community.github.io/helm-charts
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: grafana
@@ -98,7 +98,7 @@ spec:
   interval: 1h
   url: https://grafana.github.io/helm-charts
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: longhorn-repo
@@ -107,7 +107,7 @@ spec:
   interval: 1h
   url: https://charts.longhorn.io
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: elastic
@@ -116,7 +116,7 @@ spec:
   interval: 1h
   url: https://helm.elastic.co
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: stakater
@@ -125,7 +125,7 @@ spec:
   interval: 1h
   url: https://stakater.github.io/stakater-charts
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: kubernetes-dashboard
@@ -134,7 +134,7 @@ spec:
   interval: 1h
   url: https://kubernetes.github.io/dashboard/
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: mongodb
