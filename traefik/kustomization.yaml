@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
 - namespace.yaml
 # - logging-pvc.yaml
-- filebeat-configmap.yaml
-- elastic-logging-external.yaml
+# - filebeat-configmap.yaml
+# - elastic-logging-external.yaml
 - traefik-release.yaml
 - default-cert.yaml
 - default-cert-store.yaml

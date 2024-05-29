@@ -9,15 +9,14 @@ resources:
 - csi-driver-nfs.yaml
 - traefik.yaml
 - flux-webhook.yaml
-- elastic-system.yaml
-- monitoring.yaml
-- rook.yaml
 - reloader.yaml
 - uptime-kuma.yaml
 - dashboard.yaml
-- jenkins.yaml
-- webtop.yaml
-- mongodb-operator.yaml
 
 ## Removed elements:
-#- longhorn.yaml
+#- elastic-system.yaml
+#- rook.yaml
+#- jenkins.yaml
+#- webtop.yaml
+#- mongodb-operator.yaml
+#- monitoring.yaml
