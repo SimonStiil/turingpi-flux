@@ -12,6 +12,7 @@ resources:
 - reloader.yaml
 - uptime-kuma.yaml
 - dashboard.yaml
+- rook-ceph.yaml
 
 ## Removed elements:
 #- elastic-system.yaml
