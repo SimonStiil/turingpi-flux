@@ -46,7 +46,7 @@ spec:
   mon:
     # Set the number of mons to be started. Generally recommended to be 3.
     # For highest availability, an odd number of mons should be specified.
-    count: 2
+    count: 3
     # The mons should be on unique nodes. For production, at least 3 nodes are recommended for this reason.
     # Mons should only be allowed on the same node for test environments where data loss is acceptable.
     allowMultiplePerNode: false
@@ -261,11 +261,13 @@ spec:
       - name: "node2"
         devices: # specific devices to use for storage can be specified for each node
           - name: "/dev/nvme0n1p2"
-#          - name: "/dev/sda1"
+          - name: "/dev/sda"
+          - name: "/dev/sdb"
       - name: "node3"
         devices: # specific devices to use for storage can be specified for each node
           - name: "/dev/nvme0n1p2"
-#          - name: "/dev/sdb"
+          - name: "/dev/sda"
+          - name: "/dev/sdb"
       - name: "node4"
         devices: # specific devices to use for storage can be specified for each node
           - name: "/dev/nvme0n1p2"

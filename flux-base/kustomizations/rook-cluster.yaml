@@ -1,0 +1,36 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: rook-cluster
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  timeout: 5m
+  path: ./rook-cluster
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+    - name: crds-rook
+  postBuild:
+    substitute:
+      var_substitution_enabled: "true"
+    substituteFrom:
+      - kind: Secret
+        name: clusterconfig
+        optional: true
+  healthChecks:
+  - apiVersion: ceph.rook.io/v1
+    kind: CephCluster
+    name: rook-ceph
+    namespace: rook-cluster
+  - apiVersion: traefik.io/v1alpha1
+    kind: ServersTransport
+    name: allowselfsigned
+    namespace: rook-cluster
+  - apiVersion: traefik.io/v1alpha1
+    kind: IngressRoute
+    name: rook-ceph-mgr-dashboard
+    namespace: rook-cluster

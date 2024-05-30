@@ -13,6 +13,7 @@ resources:
 - uptime-kuma.yaml
 - dashboard.yaml
 - rook-ceph.yaml
+- rook-cluster.yaml
 
 ## Removed elements:
 #- elastic-system.yaml

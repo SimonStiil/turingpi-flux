@@ -4,7 +4,7 @@ resources:
 - namespace.yaml
 - cluster.yaml
 - ceph-ingress.yaml
-- replicapools.yaml
-- storageclasss.yaml
-- storageclasss-buckets.yaml
-- object-store.yaml
+#- replicapools.yaml
+#- storageclasss.yaml
+#- storageclasss-buckets.yaml
+#- object-store.yaml
