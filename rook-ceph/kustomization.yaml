@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/rook/rook/v1.14.4/deploy/examples/common.yaml
 - https://raw.githubusercontent.com/rook/rook/v1.14.4/deploy/examples/operator.yaml
+- cluster.yaml
+- ceph-ingress.yaml
