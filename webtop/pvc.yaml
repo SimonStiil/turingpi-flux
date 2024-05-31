@@ -10,7 +10,7 @@ metadata:
   name: simon-home
   namespace: webtop
 spec:
-  storageClassName: ceph-nvme
+  storageClassName: ceph-ssd
   accessModes:
     - ReadWriteOnce
   resources:
@@ -23,7 +23,7 @@ metadata:
   name: simon-data
   namespace: webtop
 spec:
-  storageClassName: ceph-nvme
+  storageClassName: ceph-ssd
   accessModes:
     - ReadWriteOnce
   resources:
