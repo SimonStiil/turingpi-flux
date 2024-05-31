@@ -261,8 +261,8 @@ spec:
       - name: "node2"
         devices: # specific devices to use for storage can be specified for each node
           - name: "/dev/nvme0n1p2"
-          - name: "/dev/sda"
-          - name: "/dev/sdb"
+          - name: "/dev/sda1"
+          - name: "/dev/sdb1"
       - name: "node3"
         devices: # specific devices to use for storage can be specified for each node
           - name: "/dev/nvme0n1p2"
