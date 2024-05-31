@@ -5,7 +5,9 @@ resources:
 - operator.yaml
 - cluster.yaml
 - ceph-ingress.yaml
-- replicapools.yaml
+- replicapools-nvme.yaml
+- replicapools-ssd.yaml
 - object-store.yaml
-- storageclasss.yaml
-- storageclasss-buckets.yaml
+- storageclass-ssd.yaml
+- storageclass-nvme.yaml
+- storageclass-buckets.yaml
