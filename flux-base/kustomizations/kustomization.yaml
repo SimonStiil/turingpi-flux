@@ -15,9 +15,9 @@ resources:
 - rook-ceph.yaml
 - jenkins.yaml
 - webtop.yaml
+- monitoring.yaml
 
 ## Removed elements:
 #- elastic-system.yaml
 #- rook.yaml
 #- mongodb-operator.yaml
-#- monitoring.yaml
