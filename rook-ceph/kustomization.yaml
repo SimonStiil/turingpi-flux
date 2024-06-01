@@ -11,3 +11,10 @@ resources:
 - storageclass-ssd.yaml
 - storageclass-nvme.yaml
 - storageclass-buckets.yaml
+
+- csi-metrics-service-monitor.yaml
+- exporter-service-monitor.yaml
+- externalrules.yaml
+# - keda-rgw.yaml
+- localrules.yaml
+- service-monitor.yaml

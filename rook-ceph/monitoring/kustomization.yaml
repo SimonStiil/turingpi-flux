@@ -1,9 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- csi-metrics-service-monitor.yaml
-- exporter-service-monitor.yaml
-- externalrules.yaml
-# - keda-rgw.yaml
-- localrules.yaml
-- service-monitor.yaml
