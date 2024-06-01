@@ -72,6 +72,7 @@ spec:
     ssl: true
     # The url of the Prometheus instance
     # prometheusEndpoint: <protocol>://<prometheus-host>:<port>
+    prometheusEndpoint: http://prometheus-prometheus:9090
     # Whether SSL should be verified if the Prometheus server is using https
     # prometheusEndpointSSLVerify: false
   # enable prometheus alerting for cluster
