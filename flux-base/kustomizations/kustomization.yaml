@@ -16,8 +16,8 @@ resources:
 - jenkins.yaml
 - webtop.yaml
 - monitoring.yaml
+- elastic-system.yaml
+- flux-system-additions.yaml
 
 ## Removed elements:
-#- elastic-system.yaml
-#- rook.yaml
 #- mongodb-operator.yaml

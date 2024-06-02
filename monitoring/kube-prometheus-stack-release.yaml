@@ -65,6 +65,13 @@ spec:
         existingSecret: grafana-admin-credentials
         userKey: admin-user
         passwordKey: admin-password
+    persistence:
+      enabled: true
+      type: sts
+      storageClassName: "ceph-ssd"
+      accessModes:
+        - ReadWriteOnce
+      size: 20Gi     
     kubeApiServer:
       enabled: true
     kubelet:
