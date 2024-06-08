@@ -3,19 +3,19 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/rook/rook/v1.14.4/deploy/examples/common.yaml
 - operator.yaml
-#- cluster.yaml
+- cluster.yaml
 
-#- ceph-ingress.yaml
-#- replicapools-nvme.yaml
+- ceph-ingress.yaml
+- replicapools-nvme.yaml
 #- replicapools-ssd.yaml
-#- object-store.yaml
+- object-store.yaml
 #- storageclass-ssd.yaml
-#- storageclass-nvme.yaml
-#- storageclass-buckets.yaml
+- storageclass-nvme.yaml
+- storageclass-buckets.yaml
 
-#- csi-metrics-service-monitor.yaml
-#- exporter-service-monitor.yaml
-#- externalrules.yaml
+- csi-metrics-service-monitor.yaml
+- exporter-service-monitor.yaml
+- externalrules.yaml
 # - keda-rgw.yaml
-#- localrules.yaml
-#- service-monitor.yaml
+- localrules.yaml
+- service-monitor.yaml

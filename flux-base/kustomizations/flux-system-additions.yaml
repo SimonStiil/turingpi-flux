@@ -46,5 +46,5 @@ spec:
   healthChecks:
   - apiVersion: objectbucket.io/v1alpha1
     kind: ObjectBucketClaim
-    name: loki
+    name: flux-loki-bucket
     namespace: flux-system

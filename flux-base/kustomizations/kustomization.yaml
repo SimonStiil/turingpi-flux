@@ -8,16 +8,16 @@ resources:
 - cert-manager.yaml
 - csi-driver-nfs.yaml
 - traefik.yaml
-#- flux-webhook.yaml
-#- reloader.yaml
-#- uptime-kuma.yaml
-#- dashboard.yaml
+- flux-webhook.yaml
+- reloader.yaml
+- uptime-kuma.yaml
+- dashboard.yaml
 - rook-ceph.yaml
-#- jenkins.yaml
-#- webtop.yaml
-#- monitoring.yaml
-#- elastic-system.yaml
-#- flux-system-additions.yaml
+- jenkins.yaml
+- monitoring.yaml
+- flux-system-additions.yaml
 
 ## Removed elements:
+#- webtop.yaml
+#- elastic-system.yaml
 #- mongodb-operator.yaml

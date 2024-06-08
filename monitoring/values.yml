@@ -179,7 +179,7 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: ceph-ssd
+          storageClassName: ceph-nvme
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
