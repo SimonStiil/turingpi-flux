@@ -81,13 +81,13 @@ spec:
         ingressClass: "traefik"
     ingressClass:
       name: traefik
-    ingressRoute:
-      dashboard:
-        annotations:
-          kubernetes.io/ingress.class: traefik
-      healthcheck:
-        annotations:
-          kubernetes.io/ingress.class: traefik
+#    ingressRoute:
+#      dashboard:
+#        annotations:
+#          kubernetes.io/ingress.class: traefik
+#      healthcheck:
+#        annotations:
+#          kubernetes.io/ingress.class: traefik
     deployment:
       additionalVolumes:
       - name: accesslog
