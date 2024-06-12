@@ -16,6 +16,7 @@ resources:
 - jenkins.yaml
 - monitoring.yaml
 - flux-system-additions.yaml
+- ntfy.yaml
 
 ## Removed elements:
 #- webtop.yaml
