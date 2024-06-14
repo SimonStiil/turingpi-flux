@@ -7,6 +7,5 @@ resources:
 - prometheus-ingress.yaml
 - grafana-ingress.yaml
 - loki-release.yaml
-# - loki-stack-release.yaml
 - promtail-release.yaml
 - kubernetes-event-exporter.yaml

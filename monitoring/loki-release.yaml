@@ -21,6 +21,10 @@ spec:
   interval: 1m0s
   targetNamespace: monitoring
   values:
+    test:
+      enabled: false
+    lokiCanary:
+      enabled: false
     gateway:
       enabled: false
     singleBinary:
@@ -63,6 +67,22 @@ spec:
         enabled: true
       ruler:
         alertmanager_url: http://prometheus-alertmanager:9093
+      compactor:
+        working_directory: /data/retention
+        compaction_interval: 10m
+        retention_enabled: true
+        retention_delete_delay: 2h
+        retention_delete_worker_count: 150
+        delete_request_store: s3
+      limits_config:
+        retention_period: 744h
+        retention_stream:
+        - selector: '{nodename=~".+"}'
+          priority: 1
+          period: 1h
+        - selector: '{reason="{{ .Reason }}"}'
+          priority: 1
+          period: 1h
     deploymentMode: SimpleScalable
     chunksCache:
       # default is 500MB, with limited memory keep this smaller
@@ -81,6 +101,8 @@ spec:
       replicas: 3
     write:
       replicas: 3
+    compactor:
+      replicas: 1
       
     ingester:
       replicas: 0
@@ -91,8 +113,6 @@ spec:
     queryScheduler:
       replicas: 0
     distributor:
-      replicas: 0
-    compactor:
       replicas: 0
     indexGateway:
       replicas: 0

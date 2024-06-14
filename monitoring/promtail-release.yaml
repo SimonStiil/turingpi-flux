@@ -43,6 +43,9 @@ spec:
               - source_labels:
                 - __journal__hostname
                 target_label: node_name
+              - source_labels:
+                - __journal_syslog_identifier
+                target_label: syslog_identifier
     extraVolumes:
     - name: journal
       hostPath:
