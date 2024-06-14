@@ -6,4 +6,5 @@ resources:
 - kube-prometheus-stack-release.yaml
 - prometheus-ingress.yaml
 - grafana-ingress.yaml
-#- loki-release.yaml
+- loki-release.yaml
+# - loki-stack-release.yaml

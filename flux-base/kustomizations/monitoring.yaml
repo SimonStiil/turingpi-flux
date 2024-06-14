@@ -22,9 +22,9 @@ spec:
         name: clusterconfig
         optional: false
       - kind: Secret
-        name: clusterconfig
+        name: flux-loki-bucket
         optional: false
       - kind: Secret
-        name: clusterconfig
+        name: flux-loki-bucket-name
         optional: false
 ---
