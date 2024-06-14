@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: webtop-simon
-        image: simonstiil/webtop-debian-xfce:main-arm64@sha256:6dfef9794c8abfb7504f694d7d02e72ad0f19f9c48fcef80139352d3415b1d58
+        image: simonstiil/webtop-debian-xfce:main-arm64@sha256:8347b801fb691a439f9164a3f53d697aefb7d2264b8191f0e4668183bf8f235b
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
