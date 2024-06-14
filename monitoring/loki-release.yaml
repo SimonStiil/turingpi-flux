@@ -26,6 +26,7 @@ spec:
     singleBinary:
       replicas: 0
     loki:
+      auth_enabled: false
       commonConfig:
         replication_factor: 1
       storage:

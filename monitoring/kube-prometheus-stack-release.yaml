@@ -65,10 +65,19 @@ spec:
         existingSecret: grafana-admin-credentials
         userKey: admin-user
         passwordKey: admin-password
+      additionalDataSources:
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki-read:3100
+        version: 1
+        isDefault: false
+        editable: false
+        jsonData: {}
     persistence:
       enabled: true
       type: sts
-      storageClassName: "ceph-ssd"
+      storageClassName: "ceph-nvme"
       accessModes:
         - ReadWriteOnce
       size: 20Gi     
@@ -189,7 +198,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: ceph-ssd
+              storageClassName: ceph-nvme
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
