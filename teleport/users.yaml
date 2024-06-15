@@ -1,0 +1,9 @@
+---
+apiVersion: resources.teleport.dev/v2
+kind: TeleportUser
+metadata:
+  name: simon
+  namespace: teleport
+spec:
+  roles: ['manager', 'engineer', 'kubernetes']
+---

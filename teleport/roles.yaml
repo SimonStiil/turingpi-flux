@@ -1,0 +1,41 @@
+---
+apiVersion: resources.teleport.dev/v1
+kind: TeleportRoleV7
+metadata:
+  name: manager
+  namespace: teleport
+spec:
+  allow:
+    rules:
+      - resources: ['user', 'role']
+        verbs: ['list','read']
+      - resources: ['session', 'event']
+        verbs: ['list', 'read']
+---
+apiVersion: resources.teleport.dev/v1
+kind: TeleportRoleV7
+metadata:
+  name: engineer
+  namespace: teleport
+spec:
+  allow:
+    logins: ['root', 'ubuntu', '{{internal.logins}}']
+    node_labels:
+      'env': ['dev', 'test', 'prod']
+---
+apiVersion: resources.teleport.dev/v1
+kind: TeleportRoleV7
+metadata:
+  name: kubernetes
+  namespace: teleport
+spec:
+  allow:
+    kubernetes_groups: ["system:masters"]
+    kubernetes_labels:
+      '*': '*'
+    kubernetes_resources:
+      - kind: '*'
+        namespace: '*'
+        name: '*'
+        verbs: ['*']
+---

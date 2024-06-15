@@ -4,3 +4,5 @@ resources:
 - namespace.yaml
 - servertransport.yaml
 - teleport-release.yaml
+- roles.yaml
+- users.yaml
