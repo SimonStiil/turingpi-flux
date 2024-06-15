@@ -17,6 +17,7 @@ resources:
 - monitoring.yaml
 - flux-system-additions.yaml
 - ntfy.yaml
+- teleport.yaml
 
 ## Removed elements:
 #- webtop.yaml
