@@ -89,9 +89,50 @@ spec:
 #        annotations:
 #          kubernetes.io/ingress.class: traefik
     deployment:
+      initContainers:
+      - name: promtail
+        image: docker.io/grafana/promtail:3.0.0
+        imagePullPolicy: IfNotPresent
+        args:
+        - -config.file=/etc/promtail/promtail.yaml
+        restartPolicy: Always
+        ports:
+        - containerPort: 3101
+          name: http-metrics
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /ready
+            port: http-metrics
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: accesslog
+          mountPath: "/accesslogs"
+        - name: promtail-config
+          mountPath: /etc/promtail/promtail.yaml
+          subPath: promtail.yaml
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
       additionalVolumes:
       - name: accesslog
         emptyDir: {}
+      - name: promtail-config
+        configMap:
+          name: promtail-config
     additionalVolumeMounts:
     - name: accesslog
       mountPath: "/accesslogs"
