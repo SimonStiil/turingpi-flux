@@ -9,3 +9,5 @@ resources:
 - loki-release.yaml
 - promtail-release.yaml
 - kubernetes-event-exporter.yaml
+- flux-monitor.yaml
+- kube-prometheus-stack-values-configmap.yaml

@@ -29,3 +29,8 @@ remember to enable the compactor deployment.
 ### Event exporter
 [Event exporter loki config](https://github.com/resmoio/kubernetes-event-exporter/blob/master/README.md#loki)  
 Would be nice if it supportet templated labels like AWS EventBridge. But it does not...
+
+### Flux events
+[Pod Monitoring](https://github.com/fluxcd/flux2-monitoring-example/blob/main/monitoring/configs/podmonitor.yaml)  
+[Kube State Metric Values](https://github.com/fluxcd/flux2-monitoring-example/blob/main/monitoring/controllers/kube-prometheus-stack/kube-state-metrics-config.yaml)  
+[Dashboards](https://github.com/fluxcd/flux2-monitoring-example/tree/main/monitoring/configs/dashboards)  

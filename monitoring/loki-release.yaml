@@ -16,9 +16,14 @@ spec:
   install:
     crds: Create
     createNamespace: true
+#    remediation:
+#      retries: 3
   upgrade:
     crds: CreateReplace
-  interval: 1m0s
+#    remediation:
+#      retries: 3
+  interval: 10m0s
+  timeout: 5m
   targetNamespace: monitoring
   values:
     test:
@@ -66,21 +71,14 @@ spec:
       ruler:
         alertmanager_url: http://prometheus-alertmanager:9093
       compactor:
-        working_directory: /data/retention
+        working_directory: /var/loki/retention
         compaction_interval: 10m
         retention_enabled: true
         retention_delete_delay: 2h
         retention_delete_worker_count: 150
         delete_request_store: s3
       limits_config:
-        retention_period: 744h
-        retention_stream:
-        - selector: '{nodename=~".+"}'
-          priority: 1
-          period: 1h
-        - selector: '{reason="{{ .Reason }}"}'
-          priority: 1
-          period: 1h
+        retention_period: 168h
     deploymentMode: SimpleScalable
     chunksCache:
       # default is 500MB, with limited memory keep this smaller
@@ -94,7 +92,7 @@ spec:
       hosts:
         - loki.${clusterdomain:=undefined}
     backend:
-      replicas: 3
+      replicas: 3        
     read:
       replicas: 3
     write:
