@@ -69,6 +69,14 @@ spec:
         existingSecret: grafana-admin-credentials
         userKey: admin-user
         passwordKey: admin-password
+      grafana.ini:
+        auth.ldap:
+          enabled: true
+          allow_sign_up: true
+          config_file: /etc/grafana/ldap.toml
+      ldap:
+        enabled: true
+        existingSecret: grafana-ldap-credentials
       additionalDataSources:
       - name: Loki
         type: loki
