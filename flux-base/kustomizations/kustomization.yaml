@@ -15,6 +15,7 @@ resources:
 - rook-ceph.yaml
 - jenkins.yaml
 - monitoring.yaml
+- monitoring-dashboards.yaml
 - flux-system-additions.yaml
 - ntfy.yaml
 - teleport.yaml

@@ -13,6 +13,7 @@ spec:
     kind: GitRepository
     name: flux-system
   dependsOn:
+    - name: crds-base
     - name: crds-cert-manager
     - name: crds-external-secrets
   healthChecks:
