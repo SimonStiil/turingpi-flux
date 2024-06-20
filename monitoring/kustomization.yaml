@@ -11,4 +11,5 @@ resources:
 - promtail-release.yaml
 - kubernetes-event-exporter.yaml
 - flux-monitor.yaml
+- traefik-monitor.yaml
 - kube-prometheus-stack-values-configmap.yaml

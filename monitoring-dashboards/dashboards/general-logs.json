@@ -8,55 +8,51 @@
       "pluginId": "loki",
       "pluginName": "Loki"
     }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "11.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "logs",
-      "name": "Logs",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "loki",
-      "name": "Loki",
-      "version": "1.0.0"
-    }
+
   ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
+        "datasource": "-- Grafana --",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "iconColor": "red",
+        "name": "flux events",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [
+            "flux"
+          ],
+          "type": "tags"
+        }
       }
     ]
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
-      "datasource": {
-        "type": "loki",
-        "uid": "${DS_LOKI}"
-      },
+      "datasource": "${DS_LOKI}",
       "gridPos": {
         "h": 26,
         "w": 24,
@@ -76,17 +72,13 @@
       },
       "targets": [
         {
-          "datasource": {
-            "type": "loki",
-            "uid": "${DS_LOKI}"
-          },
+          "datasource": "${DS_LOKI}",
           "editorMode": "builder",
           "expr": "{namespace=~\"$namespace\", app=~\"$app\", pod=~\"$pod\", container=~\"$container\"}",
           "queryType": "range",
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
       "type": "logs"
     }
   ],
@@ -95,11 +87,35 @@
   "templating": {
     "list": [
       {
-        "current": {},
-        "datasource": {
-          "type": "loki",
-          "uid": "${DS_LOKI}"
+        "current": {
+          "selected": false,
+          "text": "Loki",
+          "value": "Loki"
         },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "DS_LOKI",
+        "options": [],
+        "query": "loki",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${DS_LOKI}",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -120,11 +136,17 @@
         "type": "query"
       },
       {
-        "current": {},
-        "datasource": {
-          "type": "loki",
-          "uid": "${DS_LOKI}"
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
+        "datasource": "${DS_LOKI}",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -135,7 +157,7 @@
         "query": {
           "label": "app",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{namespace=~\"$namespace\"}",
           "type": 1
         },
         "refresh": 1,
@@ -145,11 +167,16 @@
         "type": "query"
       },
       {
-        "current": {},
-        "datasource": {
-          "type": "loki",
-          "uid": "${DS_LOKI}"
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
+        "datasource": "${DS_LOKI}",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -160,7 +187,7 @@
         "query": {
           "label": "pod",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{namespace=~\"$namespace\", app=~\"$app\"} ",
           "type": 1
         },
         "refresh": 1,
@@ -170,11 +197,16 @@
         "type": "query"
       },
       {
-        "current": {},
-        "datasource": {
-          "type": "loki",
-          "uid": "${DS_LOKI}"
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
+        "datasource": "${DS_LOKI}",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -185,7 +217,7 @@
         "query": {
           "label": "container",
           "refId": "LokiVariableQueryEditor-VariableQuery",
-          "stream": "",
+          "stream": "{namespace=~\"$namespace\", app=~\"$app\", pod=~\"$pod\"} ",
           "type": 1
         },
         "refresh": 1,
@@ -197,7 +229,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-3h",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
@@ -205,6 +237,6 @@
   "timezone": "browser",
   "title": "General Logs",
   "uid": "edpa510glauwwf",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

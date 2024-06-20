@@ -109,10 +109,27 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Loki",
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "DS_LOKI",
+        "options": [],
+        "query": "loki",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "current": {},
         "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "type": "loki",
+          "uid": "${DS_LOKI}"
         },
         "definition": "label_values(gotk_resource_info,customresource_kind)",
         "hide": 0,

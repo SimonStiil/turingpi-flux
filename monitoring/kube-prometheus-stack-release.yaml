@@ -80,11 +80,14 @@ spec:
       additionalDataSources:
       - name: Loki
         type: loki
+        uid: loki
         access: proxy
         url: http://loki-read:3100
         version: 1
         isDefault: false
         editable: false
+        label: loki_datasource
+        labelValue: "1"
         jsonData: {}
     persistence:
       enabled: true
