@@ -19,8 +19,8 @@ resources:
 - flux-system-additions.yaml
 - ntfy.yaml
 - teleport.yaml
+- webtop.yaml
 
 ## Removed elements:
-#- webtop.yaml
 #- elastic-system.yaml
 #- mongodb-operator.yaml
