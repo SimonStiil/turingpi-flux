@@ -38,16 +38,6 @@ spec:
           value: Webtop-Simon
         - name: START_DOCKER
           value: "false"
-        - name: CUSTOM_USER
-          valueFrom:
-            secretKeyRef:
-              name: webtop-simon
-              key: username
-        - name: PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: webtop-simon
-              key: password
       serviceAccountName: webtop-admin
       volumes:
         - name: simon-home
