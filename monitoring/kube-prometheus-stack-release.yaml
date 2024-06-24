@@ -77,6 +77,13 @@ spec:
       ldap:
         enabled: true
         existingSecret: grafana-ldap-credentials
+      persistence:
+        enabled: true
+        type: pvc
+        storageClassName: "ceph-nvme"
+        accessModes:
+        - ReadWriteOnce
+        size: 4Gi
       additionalDataSources:
       - name: Loki
         type: loki
