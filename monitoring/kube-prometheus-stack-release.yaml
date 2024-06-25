@@ -56,6 +56,10 @@ spec:
       enabled: true
       ingress:
         enabled: false
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     grafana:
       enabled: true
       fullnameOverride: grafana
@@ -65,6 +69,9 @@ spec:
       defaultDashboardsTimezone: utc
       serviceMonitor:
         enabled: true
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
       admin:
         existingSecret: grafana-admin-credentials
         userKey: admin-user
@@ -105,22 +112,57 @@ spec:
       size: 20Gi     
     kubeApiServer:
       enabled: true
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     kubelet:
       enabled: true
       serviceMonitor:
-        metricRelabelings:
+        relabelings:
+          - action: replace
+            sourceLabels: [__metrics_path__]
+            targetLabel: metrics_path
           - action: replace
             sourceLabels:
               - node
             targetLabel: instance
+          - targetLabel: "cluster"
+            replacement: "turingpi"
+        cAdvisorRelabelings:
+          - action: replace
+            sourceLabels: [__metrics_path__]
+            targetLabel: metrics_path
+          - targetLabel: "cluster"
+            replacement: "turingpi"
+        probesRelabelings:
+          - action: replace
+            sourceLabels: [__metrics_path__]
+            targetLabel: metrics_path
+          - targetLabel: "cluster"
+            replacement: "turingpi"
+        resourceRelabelings:
+          - action: replace
+            sourceLabels: [__metrics_path__]
+            targetLabel: metrics_path
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     kubeControllerManager:
       enabled: true
       endpoints: # ips of servers 
         - 192.168.1.111
         - 192.168.1.112
         - 192.168.1.113
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     coreDns:
       enabled: true
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     kubeDns:
       enabled: false
     kubeEtcd:
@@ -133,18 +175,30 @@ spec:
         enabled: true
         port: 2381
         targetPort: 2381
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     kubeScheduler:
       enabled: true
       endpoints: # ips of servers
         - 192.168.1.111
         - 192.168.1.112
         - 192.168.1.113
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     kubeProxy:
       enabled: true
       endpoints: # ips of servers
         - 192.168.1.111
         - 192.168.1.112
         - 192.168.1.113
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     kubeStateMetrics:
       enabled: true
     kube-state-metrics:
@@ -161,6 +215,8 @@ spec:
               sourceLabels:
                 - __meta_kubernetes_pod_node_name
               targetLabel: kubernetes_node
+            - targetLabel: "cluster"
+              replacement: "turingpi"
     nodeExporter:
       enabled: true
       serviceMonitor:
@@ -171,6 +227,8 @@ spec:
             sourceLabels:
               - __meta_kubernetes_pod_node_name
             targetLabel: kubernetes_node
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       podLabels:
@@ -190,6 +248,8 @@ spec:
               sourceLabels:
                 - __meta_kubernetes_pod_node_name
               targetLabel: kubernetes_node
+            - targetLabel: "cluster"
+              replacement: "turingpi"
       resources:
         requests:
           memory: 512Mi
@@ -205,6 +265,10 @@ spec:
             memory: 50Mi
           limits:
             memory: 100Mi
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     prometheus:
       enabled: true
       prometheusSpec:
@@ -225,5 +289,9 @@ spec:
               resources:
                 requests:
                   storage: 50Gi
+      serviceMonitor:
+        relabelings:
+          - targetLabel: "cluster"
+            replacement: "turingpi"
     thanosRuler:
       enabled: false
