@@ -83,6 +83,9 @@ spec:
     chunksCache:
       # default is 500MB, with limited memory keep this smaller
       writebackSizeLimit: 10MB
+      allocatedMemory: 750
+    resultsCache:
+      allocatedMemory: 100
     ingress:
       enabled: true
       annotations: 
