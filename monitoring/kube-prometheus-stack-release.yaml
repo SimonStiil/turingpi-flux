@@ -90,7 +90,7 @@ spec:
         storageClassName: "ceph-nvme"
         accessModes:
         - ReadWriteOnce
-        size: 4Gi
+        size: 1Gi
       additionalDataSources:
       - name: Loki
         type: loki
