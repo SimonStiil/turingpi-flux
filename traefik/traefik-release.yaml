@@ -9,7 +9,7 @@ spec:
     spec:
       chart: traefik
       reconcileStrategy: ChartVersion
-      version: 28.2.0
+      version: 29.0.0
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -91,7 +91,7 @@ spec:
     deployment:
       initContainers:
       - name: promtail
-        image: docker.io/grafana/promtail:3.0.0
+        image: docker.io/grafana/promtail:3.1.0
         imagePullPolicy: IfNotPresent
         args:
         - -config.file=/etc/promtail/promtail.yaml
