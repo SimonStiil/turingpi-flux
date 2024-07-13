@@ -70,6 +70,16 @@ spec:
                 secretKeyRef:
                   name: homepage-secret
                   key: diskstation-password
+            - name: HOMEPAGE_VAR_UNIFI_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: homepage-secret
+                  key: unifi-username
+            - name: HOMEPAGE_VAR_UNIFI_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: homepage-secret
+                  key: unifi-password
             - name: HOMEPAGE_VAR_ELASTIC_USERNAME
               valueFrom:
                 secretKeyRef:

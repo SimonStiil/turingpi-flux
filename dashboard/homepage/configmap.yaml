@@ -91,98 +91,6 @@ data:
           widget:
             type: traefik
             url: https://traefik.diskstation.${topleveldomain:=undefined}
-    - Elastic:
-      - Elastic Cluster Health:
-          href: https://kibana.${clusterdomain:=undefined}
-          siteMonitor: https://elastic.${clusterdomain:=undefined}
-          server: turing
-          widget:
-            type: customapi
-            url: https://elastic.${clusterdomain:=undefined}/_cluster/health
-            username: {{HOMEPAGE_VAR_ELASTIC_USERNAME}}
-            password: {{HOMEPAGE_VAR_ELASTIC_PASSWORD}}
-            refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
-            method: GET
-            headers:
-              kbn-xsrf: reporting
-            mappings:
-            - field: status
-              label: Status
-            - field: number_of_nodes
-              label: Node Count
-              format: number
-            - field: active_shards
-              label: Active Shards
-              format: number
-            - field: active_shards_percent_as_number
-              label: Active Shards
-              format: percent
-      - Elastic Health Report Cluster:
-          href: https://kibana.${clusterdomain:=undefined}
-          server: turing
-          siteMonitor: https://elastic.${clusterdomain:=undefined}
-          widget:
-            type: customapi
-            url: https://elastic.${clusterdomain:=undefined}/_health_report
-            username: {{HOMEPAGE_VAR_ELASTIC_USERNAME}}
-            password: {{HOMEPAGE_VAR_ELASTIC_PASSWORD}}
-            refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
-            method: GET
-            headers:
-              kbn-xsrf: reporting
-            mappings:
-            - field: 
-                indicators:
-                  master_is_stable: status
-              label: Stable Master
-            - field: 
-                indicators:
-                  master_is_stable: 
-                    details:
-                      current_master: name
-              label: Current Master
-            - field:
-                indicators:
-                  disk: status
-              label: Disk Status
-            - field:
-                indicators:
-                  disk: 
-                    details: nodes_with_enough_disk_space
-              label: Disks
-              format: number
-      - Elastic Health Report Details:
-          href: https://kibana.${clusterdomain:=undefined}
-          server: turing
-          siteMonitor: https://elastic.${clusterdomain:=undefined}
-          widget:
-            type: customapi
-            url: https://elastic.${clusterdomain:=undefined}/_health_report
-            username: {{HOMEPAGE_VAR_ELASTIC_USERNAME}}
-            password: {{HOMEPAGE_VAR_ELASTIC_PASSWORD}}
-            refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
-            method: GET
-            headers:
-              kbn-xsrf: reporting
-            mappings:
-            - field: 
-                indicators:
-                  data_stream_lifecycle: status
-              label: DSL
-            - field:
-                indicators:
-                  slm: status
-              label: SLM
-            - field:
-                indicators:
-                  ilm: status
-              label: ILM
-            - field:
-                indicators:
-                  ilm: 
-                    details: policies
-              label: ILM Policies
-              format: number
     - Cluster:
       - Jenkins:
           icon: jenkins.png
@@ -251,6 +159,10 @@ data:
               label: Bot Closed
 
   widgets.yaml: |
+    - unifi_console:
+        url: https://192.168.1.1:443
+        username: {{HOMEPAGE_VAR_UNIFI_USERNAME}}
+        password: {{HOMEPAGE_VAR_UNIFI_PASSWORD}}
     - kubernetes:
         cluster:
           show: true
