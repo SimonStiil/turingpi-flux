@@ -9,16 +9,16 @@ resources:
 - csi-driver-nfs.yaml
 - traefik.yaml
 - flux-webhook.yaml
-- reloader.yaml
-- uptime-kuma.yaml
-- dashboard.yaml
-- rook-ceph.yaml
-- jenkins.yaml
-- monitoring.yaml
+#- reloader.yaml
+#- uptime-kuma.yaml
+#- dashboard.yaml
+#- rook-ceph.yaml
+#- jenkins.yaml
+#- monitoring.yaml
 # - monitoring-dashboards.yaml
-- flux-system-additions.yaml
-- ntfy.yaml
-- teleport.yaml
+#- flux-system-additions.yaml
+#- ntfy.yaml
+#- teleport.yaml
 # - webtop.yaml
 
 ## Removed elements:
