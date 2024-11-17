@@ -9,7 +9,7 @@ spec:
     spec:
       chart: kubernetes-dashboard
       reconcileStrategy: ChartVersion
-      version: 7.5.0
+      version: 7.10.0
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
